@@ -97,11 +97,11 @@ jobs:
         filename: .github/BUILD_TEMPLATE.md       
        
     - name: Upload Build folder to Artifact
-      run: echo "Build folder to Artict"
-#      uses: actions/upload-artifact@v2
-#      with:
-#        name: Node_build
-#        path: ./nodeapp/build
+#      run: echo "Build folder to Artict"
+      uses: actions/upload-artifact@v2
+      with:
+        name: Node_build
+        path: ./nodeapp/build
    
   deploy-staging:
     needs: [build]
@@ -118,17 +118,18 @@ jobs:
       uses: actions/checkout@v2
       
     - name: Download from artifact
-      run: echo "Download from Artifact"
-#      uses: actions/download-artifact@v3
-#      with:
-#         name: Node_build
-#         path: ./nodeapp/build
+#      run: echo "Download from Artifact"
+      uses: actions/download-artifact@v3
+      with:
+         name: Node_build
+         path: ./nodeapp/build
         
     - name: Login to Azure(using Service Principal Identity) for Staging server 
       id: login
-      uses: azure/login@v1
-      with:
-        creds: ${{ secrets.AZURE_CREDENTIALS }}
+      run: echo "Build folder to Artict"
+     # uses: azure/login@v1
+     # with:
+     #   creds: ${{ secrets.AZURE_CREDENTIALS }}
         
     #- name: Configure Azure App Service
     #  id: settings
@@ -140,9 +141,10 @@ jobs:
     - name: Deploy to Azure App Service for Staging server
       id: deploy
       if: ${{ always() && steps.login.outcome == 'success' }}
-      uses: azure/webapps-deploy@v2
-      with:
-        app-name: ${{ secrets.AZURE_APPSERVICE_NAME }}
+      run: echo "Build folder to Artict"
+    #  uses: azure/webapps-deploy@v2
+    #  with:
+    #    app-name: ${{ secrets.AZURE_APPSERVICE_NAME }}
 #       package: ./nodeapp/build
 
     - name: Create Issue (If Deploy fail)
@@ -170,17 +172,18 @@ jobs:
       uses: actions/checkout@v2
       
     - name: Download from artifact
-      run: echo "Download from artifact"
-#      uses: actions/download-artifact@v3
-#      with:
-#         name: Node_build
-#         path: ./nodeapp/build
+#      run: echo "Download from artifact"
+      uses: actions/download-artifact@v3
+      with:
+         name: Node_build
+         path: ./nodeapp/build
      
     - name: Login to Azure(using Service Principal Identity) for Production server
       id: login
-      uses: azure/login@v1
-      with:
-        creds: ${{ secrets.AZURE_CREDENTIALS }}
+      run: echo "Build folder to Artict"
+    #  uses: azure/login@v1
+    #  with:
+     #   creds: ${{ secrets.AZURE_CREDENTIALS }}
     
     #- name: Configure Azure App Service
     #  id: settings
